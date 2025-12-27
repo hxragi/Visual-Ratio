@@ -3,7 +3,7 @@
 	"id": "visual-ratio",
 	"version": "${version}",
 	"name": "Visual Ratio",
-	"description": "My visual ratio mod",
+	"description": "Client-side mod that lets you customize your Minecraft aspect ratio independently from window size.",
 	"authors": [
 		"hxragi"
 	],
@@ -24,7 +24,7 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.18.2",
-		"minecraft": "~1.21.8",
+		"minecraft": ">=1.21.8",
 		"java": ">=21",
 		"fabric-api": "*",
 		"fzzy_config": "*"
