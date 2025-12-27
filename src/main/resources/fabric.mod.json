@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "visual-ratio",
+	"version": "${version}",
+	"name": "Visual Ratio",
+	"description": "My visual ratio mod",
+	"authors": [
+		"hxragi"
+	],
+	"contact": {
+		"sources": "https://github.com/hxragi/Visual-Ratio",
+		"issues": "https://github.com/hxragi/Visual-Ratio/issues"
+	},
+	"license": "MIT",
+	"icon": "assets/visual-ratio/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"dev.hxragi.VisualRatio"
+		]
+	},
+	"mixins": [
+		"visual-ratio.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.18.2",
+		"minecraft": "~1.21.8",
+		"java": ">=21",
+		"fabric-api": "*",
+		"fzzy_config": "*"
+	},
+	"custom": {
+		"fzzy_config": [
+			"visual-ratio"
+		]
+	}
+}

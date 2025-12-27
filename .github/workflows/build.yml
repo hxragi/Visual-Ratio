@@ -1,0 +1,58 @@
+name: Publish to Modrinth
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+
+      - name: validate gradle wrapper
+        uses: gradle/actions/wrapper-validation@v4
+
+      - name: setup jdk
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'adoptium'
+
+      - name: make gradle wrapper executable
+        run: chmod +x ./gradlew
+
+      - name: build
+        run: ./gradlew build
+
+      - name: publish to modrinth
+        uses: cloudnode-pro/modrinth-publish@v2
+        with:
+          token: ${{ secrets.MODRINTH_TOKEN }}
+          project: hW01X2TN
+
+          name: ${{ github.event.release.name }}
+          version: ${{ github.event.release.tag_name }}
+          changelog: ${{ github.event.release.body }}
+
+          loaders: fabric
+
+          game-versions: |-
+            1.21.8
+
+          files: build/libs/*[0-9].jar
+
+          dependencies: |-
+            [{
+                "project_id": "P7dR8mSH",
+                "dependency_type": "required"
+            },
+            {
+                "project_id": "mOgUt4GM",
+                "dependency_type": "required"
+            },
+            {
+                "project_id": "mOgUt4GM",
+                "dependency_type": "optional"
+            }]
