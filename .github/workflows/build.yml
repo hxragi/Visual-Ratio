@@ -1,8 +1,9 @@
-name: Publish to Modrinth
+name: Build
 
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - master
 
 jobs:
   publish:
@@ -26,15 +27,19 @@ jobs:
       - name: build
         run: ./gradlew build
 
+      - name: Get version from gradle.properties
+        id: version
+        run: echo "VERSION=$(grep '^mod_version=' gradle.properties | cut -d'=' -f2)" >> $GITHUB_OUTPUT
+
       - name: publish to modrinth
         uses: cloudnode-pro/modrinth-publish@v2
         with:
           token: ${{ secrets.MODRINTH_TOKEN }}
           project: hW01X2TN
 
-          name: ${{ github.event.release.name }}
-          version: ${{ github.event.release.tag_name }}
-          changelog: ${{ github.event.release.body }}
+          name: Visual Ratio ${{ steps.version.outputs.VERSION }}
+          version: ${{ steps.version.outputs.VERSION }}
+          changelog: Automated build from master branch
 
           loaders: fabric
 
@@ -49,7 +54,7 @@ jobs:
                 "dependency_type": "required"
             },
             {
-                "project_id": "mOgUt4GM",
+                "project_id": "hYykXjDp",
                 "dependency_type": "required"
             },
             {
