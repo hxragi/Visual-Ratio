@@ -5,27 +5,17 @@ import me.fzzyhmstrs.fzzy_config.annotations.NonSync;
 import me.fzzyhmstrs.fzzy_config.config.Config;
 import me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean;
 import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedFloat;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 public class VisualRatioConfig extends Config {
-  private static final float DEFAULT_RATIO = 1.5f;
-  private static final float MIN_RATIO = 0.3f;
-  private static final float MAX_RATIO = 10.0f;
 
-  private static final float DEFAULT_STEP_RATIO = 0.5f;
-  private static final float MIN_STEP_RATIO = 0.1f;
-  private static final float MAX_STEP_RATIO = 2.0f;
+    public VisualRatioConfig() {
+        super(ResourceLocation.fromNamespaceAndPath(VisualRatio.MOD_ID, "config"));
+    }
 
-  public VisualRatioConfig() {
-    super(Identifier.fromNamespaceAndPath(VisualRatio.MOD_ID, "config"));
-  }
+    @NonSync
+    public ValidatedBoolean enable = new ValidatedBoolean(false);
 
-  @NonSync
-  public ValidatedBoolean enable = new ValidatedBoolean(false);
-
-  @NonSync
-  public ValidatedFloat aspectRatio = new ValidatedFloat(DEFAULT_RATIO, MAX_RATIO, MIN_RATIO);
-
-  @NonSync
-  public ValidatedFloat ratioStep = new ValidatedFloat(DEFAULT_STEP_RATIO, MAX_STEP_RATIO, MIN_STEP_RATIO);
+    @NonSync
+    public ValidatedFloat aspectRatio = new ValidatedFloat(1.50f, 10.0f, 0.3f);
 }
