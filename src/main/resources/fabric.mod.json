@@ -23,15 +23,12 @@
 		"visual-ratio.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.18.4",
-		"minecraft": ">=1.21.11",
+		"fabricloader": ">=0.18.2",
+		"minecraft": ">=1.21.8",
 		"java": ">=21",
 		"fabric-api": "*",
 		"fzzy_config": "*"
 	},
-  "suggests": {
-    "modmenu": "*"
-  },
 	"custom": {
 		"fzzy_config": [
 			"visual-ratio"
