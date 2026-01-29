@@ -1,6 +1,5 @@
 package dev.hxragi.mixin;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import dev.hxragi.VisualRatio;
 import net.minecraft.client.renderer.GameRenderer;
 import org.joml.Matrix4f;
@@ -13,21 +12,21 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin {
 
-	@Shadow
-	private float renderDistance;
+  @Shadow
+  private float renderDistance;
 
-	@Inject(method = "getProjectionMatrix", at = @At("TAIL"), cancellable = true)
-	private void visualratio$modifyProjectionMatrix(float fov, CallbackInfoReturnable<Matrix4f> cir) {
-		if (VisualRatio.CONFIG.enable.get()) {
-			PoseStack poseStack = new PoseStack();
-			poseStack.last().pose().identity();
-			poseStack.last().pose().mul(new Matrix4f().setPerspective(
-					(float) Math.toRadians(fov),
-					VisualRatio.CONFIG.aspectRatio.get(),
-					0.05f,
-					this.renderDistance * 4.0f
-			));
-			cir.setReturnValue(poseStack.last().pose());
-		}
-	}
+  @Inject(method = "getProjectionMatrix", at = @At("TAIL"), cancellable = true)
+  private void visualratio$modifyProjectionMatrix(float fov, CallbackInfoReturnable<Matrix4f> cir) {
+    if (VisualRatio.getConfig().enable.get()) {
+      Matrix4f original = cir.getReturnValue();
+      Matrix4f modified = new Matrix4f(original);
+
+      modified.setPerspective(
+          (float) Math.toRadians(fov),
+          VisualRatio.getConfig().aspectRatio.get(),
+          original.m22(),
+          original.m23());
+      cir.setReturnValue(modified);
+    }
+  }
 }
