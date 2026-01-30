@@ -23,11 +23,13 @@ public class KeyBinding {
   public static void register() {
     increaseKey = KeyBindingHelper
         .registerKeyBinding(
-            new KeyMapping("key.increaseKey", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, CATEGORY));
+            new KeyMapping("key.visual-ratio.increaseKey", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN,
+                CATEGORY));
 
     decreaseKey = KeyBindingHelper
         .registerKeyBinding(
-            new KeyMapping("key.decreaseKey", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, CATEGORY));
+            new KeyMapping("key.visual-ratio.decreaseKey", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN,
+                CATEGORY));
 
     ClientTickEvents.END_CLIENT_TICK.register(client -> {
       while (increaseKey.consumeClick()) {
