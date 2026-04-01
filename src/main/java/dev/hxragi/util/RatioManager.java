@@ -4,17 +4,18 @@ import dev.hxragi.VisualRatio;
 import dev.hxragi.render.ProjectionCache;
 
 public final class RatioManager {
-  public RatioManager() {
+
+  private RatioManager() {
   }
 
-  public void increaseRatio() {
+  public static void increaseRatio() {
     var config = VisualRatio.config;
     config.aspectRatio
         .setAndUpdate(config.aspectRatio.get() + config.ratioStep.get());
     ProjectionCache.invalidate();
   }
 
-  public void decreaseRatio() {
+  public static void decreaseRatio() {
     var config = VisualRatio.config;
     config.aspectRatio
         .setAndUpdate(config.aspectRatio.get() - config.ratioStep.get());

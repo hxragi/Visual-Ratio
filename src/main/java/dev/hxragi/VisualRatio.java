@@ -2,7 +2,6 @@ package dev.hxragi;
 
 import dev.hxragi.config.VisualRatioConfig;
 import dev.hxragi.keybind.KeyBinding;
-import kotlin.jvm.functions.Function0;
 import me.fzzyhmstrs.fzzy_config.api.ConfigApi;
 import net.fabricmc.api.ClientModInitializer;
 

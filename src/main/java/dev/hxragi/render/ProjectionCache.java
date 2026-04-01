@@ -12,14 +12,11 @@ public class ProjectionCache {
   private ProjectionCache() {
   }
 
-  public static Matrix4f get(
-      float fovDeg,
-      float aspectRatio,
-      float farPlane) {
+  public static Matrix4f get(float fovDeg, float aspectRatio, float farPlane) {
     if (fovDeg != lastFov || aspectRatio != lastAspect || farPlane != lastFar) {
       rebuild(fovDeg, aspectRatio, farPlane);
     }
-    return CACHED;
+    return new Matrix4f(CACHED);
   }
 
   private static void rebuild(float fovDeg, float aspectRatio, float farPlane) {
@@ -35,8 +32,8 @@ public class ProjectionCache {
   }
 
   public static void invalidate() {
-    lastFov = -1f;
-    lastAspect = -1f;
-    lastFar = -1f;
+    lastFov = Float.NaN;
+    lastAspect = Float.NaN;
+    lastFar = Float.NaN;
   }
 }
