@@ -5,7 +5,7 @@ import org.lwjgl.glfw.GLFW;
 import com.mojang.blaze3d.platform.InputConstants;
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.Identifier;
 
@@ -13,13 +13,13 @@ import dev.hxragi.VisualRatio;
 import dev.hxragi.util.RatioManager;
 
 public class KeyBinding {
-  private static KeyMapping.Category CATEGORY = new KeyMapping.Category(
+  private static final KeyMapping.Category CATEGORY = new KeyMapping.Category(
       Identifier.fromNamespaceAndPath(VisualRatio.MOD_ID, "category.visual-ratio"));
 
-  private static final KeyMapping increaseKey = KeyBindingHelper.registerKeyBinding(
+  private static final KeyMapping increaseKey = KeyMappingHelper.registerKeyMapping(
       new KeyMapping("key.visual-ratio.increaseKey", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, CATEGORY));
 
-  private static final KeyMapping decreaseKey = KeyBindingHelper.registerKeyBinding(
+  private static final KeyMapping decreaseKey = KeyMappingHelper.registerKeyMapping(
       new KeyMapping("key.visual-ratio.decreaseKey", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, CATEGORY));
 
   private KeyBinding() {
