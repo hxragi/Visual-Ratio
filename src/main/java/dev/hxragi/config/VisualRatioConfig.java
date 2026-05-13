@@ -20,5 +20,5 @@ public class VisualRatioConfig extends Config {
   public ValidatedFloat aspectRatio = new ValidatedFloat(1.5f, 10.0f, 0.3f);
 
   @NonSync
-  public ValidatedFloat ratioStep = new ValidatedFloat(0.5f, 2.0f, 0.1f);
+  public ValidatedFloat ratioStep = new ValidatedFloat(0.5f, 2.0f, 0.01f);
 }
