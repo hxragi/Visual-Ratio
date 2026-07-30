@@ -48,9 +48,7 @@ jobs:
           loaders: fabric
 
           game-versions: |-
-            26.1
-            26.1.1
-            26.1.2
+            26.2
 
           files: ${{ steps.jar.outputs.JAR_FILE }}
 
