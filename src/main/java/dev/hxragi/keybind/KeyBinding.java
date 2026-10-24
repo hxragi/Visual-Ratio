@@ -1,7 +1,5 @@
 package dev.hxragi.keybind;
 
-import org.lwjgl.glfw.GLFW;
-
 import com.mojang.blaze3d.platform.InputConstants;
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -17,10 +15,10 @@ public class KeyBinding {
       Identifier.fromNamespaceAndPath(VisualRatio.MOD_ID, "category.visual-ratio"));
 
   private static final KeyMapping increaseKey = KeyMappingHelper.registerKeyMapping(
-      new KeyMapping("key.visual-ratio.increaseKey", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, CATEGORY));
+      new KeyMapping("key.visual-ratio.increaseKey", InputConstants.UNKNOWN.getValue(), CATEGORY));
 
   private static final KeyMapping decreaseKey = KeyMappingHelper.registerKeyMapping(
-      new KeyMapping("key.visual-ratio.decreaseKey", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, CATEGORY));
+      new KeyMapping("key.visual-ratio.decreaseKey", InputConstants.UNKNOWN.getValue(), CATEGORY));
 
   private KeyBinding() {
   }
