@@ -3,30 +3,24 @@ package dev.hxragi.mixin;
 import dev.hxragi.VisualRatio;
 import net.minecraft.client.renderer.Projection;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(Projection.class)
 public abstract class ProjectionMixin {
-  @Shadow
-  private float width;
-  @Shadow
-  private float height;
-  @Shadow
-  private boolean isMatrixDirty;
 
-  @Inject(method = "setupPerspective", at = @At("TAIL"))
-  private void visualratio$modifyAspectRatio(
-      float fov, float width, float height, float zNear, float zFar,
-      CallbackInfo ci) {
-    if (!VisualRatio.getConfig().enable.get())
-      return;
+  @ModifyVariable(
+      method = "setupPerspective",
+      at = @At("HEAD"),
+      argsOnly = true,
+      ordinal = 3
+  )
+  private float visualratio$modifyWidth(
+      float width, float zNear, float zFar, float fov, float origWidth, float height) {
+    if (!VisualRatio.getConfig().enable.get()) {
+      return width;
+    }
 
-    float targetAspect = VisualRatio.getConfig().aspectRatio.get();
-
-    this.width = this.height * targetAspect;
-    this.isMatrixDirty = true;
+    return height * VisualRatio.getConfig().aspectRatio.get();
   }
 }
