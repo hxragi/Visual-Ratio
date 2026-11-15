@@ -12,8 +12,8 @@ base {
 
 repositories {
 	maven {
-		name = "FzzyMaven"
-		url = "https://maven.fzzyhmstrs.me/"
+		name = "Hoseki"
+		url = "https://hxragi.github.io/hoseki/"
 	}
 	maven {
 		name = "Terraformers"
@@ -27,7 +27,8 @@ dependencies {
 	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	implementation "me.fzzyhmstrs:fzzy_config:${project.fzzyConfigVersion}"
+	implementation "dev.hxragi:hoseki:1.0.0"
+	include "dev.hxragi:hoseki:1.0.0"
 	implementation("com.terraformersmc:modmenu:${project.modmenu_version}")
 }
 

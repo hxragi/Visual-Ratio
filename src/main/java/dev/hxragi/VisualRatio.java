@@ -2,7 +2,6 @@ package dev.hxragi;
 
 import dev.hxragi.config.VisualRatioConfig;
 import dev.hxragi.keybind.KeyBinding;
-import me.fzzyhmstrs.fzzy_config.api.ConfigApi;
 import net.fabricmc.api.ClientModInitializer;
 
 public class VisualRatio implements ClientModInitializer {
@@ -15,7 +14,7 @@ public class VisualRatio implements ClientModInitializer {
 
   @Override
   public void onInitializeClient() {
-    config = ConfigApi.registerAndLoadConfig(VisualRatioConfig::new);
+    config = new VisualRatioConfig();
     KeyBinding.register();
   }
 }

@@ -8,14 +8,20 @@ public final class RatioManager {
   }
 
   public static void increaseRatio() {
-    var config = VisualRatio.config;
-    config.aspectRatio
-        .setAndUpdate(config.aspectRatio.get() + config.ratioStep.get());
+    var config = VisualRatio.getConfig();
+    float current = config.aspectRatio.get();
+    float step = config.ratioStep.get();
+    float next = Math.min((float) config.aspectRatio.getMax(), current + step);
+    config.aspectRatio.set(next);
+    config.save();
   }
 
   public static void decreaseRatio() {
-    var config = VisualRatio.config;
-    config.aspectRatio
-        .setAndUpdate(config.aspectRatio.get() - config.ratioStep.get());
+    var config = VisualRatio.getConfig();
+    float current = config.aspectRatio.get();
+    float step = config.ratioStep.get();
+    float next = Math.max((float) config.aspectRatio.getMin(), current - step);
+    config.aspectRatio.set(next);
+    config.save();
   }
 }

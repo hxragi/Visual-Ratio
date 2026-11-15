@@ -1,24 +1,42 @@
 package dev.hxragi.config;
 
 import dev.hxragi.VisualRatio;
-import me.fzzyhmstrs.fzzy_config.annotations.NonSync;
-import me.fzzyhmstrs.fzzy_config.config.Config;
-import me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedBoolean;
-import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedFloat;
-import net.minecraft.resources.Identifier;
+import dev.hxragi.hoseki.Hoseki;
+import dev.hxragi.hoseki.api.HosekiConfig;
+import dev.hxragi.hoseki.api.Option;
 
-public class VisualRatioConfig extends Config {
+public class VisualRatioConfig {
+  private final HosekiConfig hosekiConfig;
+  public Option<Boolean> enable;
+  public Option<Float> aspectRatio;
+  public Option<Float> ratioStep;
 
   public VisualRatioConfig() {
-    super(Identifier.fromNamespaceAndPath(VisualRatio.MOD_ID, "config"));
+    this.hosekiConfig = Hoseki.config(VisualRatio.MOD_ID)
+        .title("Visual Ratio")
+        .category("General", cat -> {
+          this.enable = cat.addToggle("enable", false, b -> b
+              .name("Enable Aspect Ratio")
+              .description("Toggle custom aspect ratio modifications"));
+
+          this.aspectRatio = cat.addFloatSlider("aspectRatio", 1.5f, 0.3f, 10.0f, b -> b
+              .step(0.01f)
+              .name("Aspect Ratio")
+              .description("Custom viewport aspect ratio (width / height)"));
+
+          this.ratioStep = cat.addFloatSlider("ratioStep", 0.5f, 0.01f, 2.0f, b -> b
+              .step(0.01f)
+              .name("Ratio Step")
+              .description("Step size when adjusting ratio via hotkeys"));
+        })
+        .buildAndLoad();
   }
 
-  @NonSync
-  public ValidatedBoolean enable = new ValidatedBoolean(false);
+  public HosekiConfig getHosekiConfig() {
+    return hosekiConfig;
+  }
 
-  @NonSync
-  public ValidatedFloat aspectRatio = new ValidatedFloat(1.5f, 10.0f, 0.3f);
-
-  @NonSync
-  public ValidatedFloat ratioStep = new ValidatedFloat(0.5f, 2.0f, 0.01f);
+  public void save() {
+    hosekiConfig.save();
+  }
 }

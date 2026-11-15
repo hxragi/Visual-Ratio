@@ -17,6 +17,9 @@
 	"entrypoints": {
 		"client": [
 			"dev.hxragi.VisualRatio"
+		],
+		"modmenu": [
+			"dev.hxragi.compat.ModMenuCompat"
 		]
 	},
 	"mixins": [
@@ -26,15 +29,9 @@
 		"fabricloader": ">=0.19.5",
 		"minecraft": "~26.3",
 		"java": ">=25",
-		"fabric-api": "*",
-		"fzzy_config": "*"
+		"fabric-api": "*"
 	},
-  "suggests": {
-    "modmenu": "*"
-  },
-	"custom": {
-		"fzzy_config": [
-			"visual-ratio"
-		]
+	"suggests": {
+		"modmenu": "*"
 	}
 }
